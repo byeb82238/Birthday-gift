@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ahana Ahmed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div class="balloons-container"></div>
+    <div class="confetti-container"></div>
+
+   
+    <div class="nav-dots">
+        <div class="dot active" data-section="header"></div>
+        <div class="dot" data-section="message"></div>
+        <div class="dot" data-section="gallery"></div>
+        <div class="dot" data-section="quotes"></div>
+    </div>
+
+    
+    <div class="container">
+      
+        <div class="header scroll-section" id="header">
+            <div class="birthday-text">Happy Birthday</div>
+            <h1 class="name">AHANA</h1>
+            <div class="birthday-text">May your day be as special as you are!</div>
+        </div>
+        
+       
+        <div class="content scroll-section" id="message">
+            <div class="message">
+                On this special day, I wish you all the joy your heart can hold, 
+                all the smiles a day can bring, and all the blessings a life can unfold. 
+                You deserve the world and more! 
+                <span class="heart">❤️</span>
+            </div>
+            
+           
+            <div class="gallery-section scroll-section" id="gallery">
+                <h2 class="section-title">Our Beautiful Memories</h2>
+                <div class="gallery" id="photo-gallery">
+                  
+                </div>
+                <button class="upload-btn" onclick="document.getElementById('photo-upload').click()">
+                    Add Your Photo
+                </button>
+                <input type="file" id="photo-upload" accept="image/*" onchange="handlePhotoUpload(event)">
+            </div>
+
+         
+            <div class="quotes-section scroll-section" id="quotes">
+                <h2 class="section-title">For My Beautiful Ahana</h2>
+                <div class="quote-container">
+                    <div class="quote active">
+                        "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
+                    </div>
+                    <div class="quote">
+                        "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more."
+                    </div>
+                    <div class="quote">
+                        "You're my favorite notification, my sweetest distraction, and my happiest thought."
+                    </div>
+                    <div class="quote">
+                        "If I had a flower for every time I thought of you... I could walk through my garden forever."
+                    </div>
+                    <div class="quote">
+                        "I love you not only for what you are, but for what I am when I am with you."
+                    </div>
+                    <div class="quote-author">- For you, always -</div>
+                </div>
+                <div class="quote-nav">
+                    <div class="quote-dot active" data-index="0"></div>
+                    <div class="quote-dot" data-index="1"></div>
+                    <div class="quote-dot" data-index="2"></div>
+                    <div class="quote-dot" data-index="3"></div>
+                    <div class="quote-dot" data-index="4"></div>
+                </div>
+            </div>
+        </div>
+        
+      
+        <div class="footer">
+            <p>Wishing you a day filled with love, laughter, and happiness!</p>
+            <div class="wish">With all my love</div>
+        </div>
+    </div>
+    
+
+    <div class="modal" id="image-modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script>
+     
+        function createBalloons() {
+            const colors = ['#ff6b6b', '#ff8e53', '#ffcc70', '#4ecdc4', '#6a0572', '#1a936f'];
+            const balloonsContainer = document.querySelector('.balloons-container');
+            
+            for (let i = 0; i < 15; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                
+         
+                const size = Math.random() * 20 + 20;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 15;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                balloon.style.width = `${size}px`;
+                balloon.style.height = `${size * 1.25}px`;
+                balloon.style.left = `${left}%`;
+                balloon.style.animationDelay = `${delay}s`;
+                balloon.style.animationDuration = `${duration}s`;
+                balloon.style.backgroundColor = color;
+                
+                balloonsContainer.appendChild(balloon);
+            }
+        }
+        
+   
+        function createConfetti() {
+            const confettiContainer = document.querySelector('.confetti-container');
+            const colors = ['#ff6b6b', '#ff8e53', '#ffcc70', '#4ecdc4', '#6a0572', '#1a936f'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+          
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 3 + 3;
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const shape = Math.random() > 0.5 ? 'circle' : 'square';
+                
+                confetti.style.left = `${left}%`;
+                confetti.style.animationDelay = `${delay}s`;
+                confetti.style.animationDuration = `${duration}s`;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                
+                if (shape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        
+ const sampleImages = [
+  'image/IMG_20250617_125105.jpg',
+  'image/IMG_20250517_164126.jpg',
+  'image/IMG_20250617_150817.jpg',
+  'image/IMG_20250308_070934_828.jpg',
+  'image/IMG_20250517_164145.jpg',
+  'image/IMG_20250617_150815.jpg',
+  'image/IMG_20250310_134405.jpg',
+  'image/IMG_20250617_154241.jpg',
+  'image/IMG_20250328_160131.jpg',
+  'image/IMG_20250328_160512.jpg',
+  'image/IMG_20250416_151206.jpg',
+  'image/IMG_20250416_151213.jpg',
+  'image/IMG_20250517_162535.jpg',
+  'image/IMG_20250517_163137.jpg',
+  'image/IMG_20250517_163641.jpg',
+  'image/IMG_20250617_154245.jpg',
+  'image/IMG_20250328_160838.jpg',
+  'image/IMG_20250701_232500.jpg',
+  'image/IMG_20250701_232701.jpg',
+  'image/IMG_20250617_150817.jpg',
+  'image/IMG_20250608_170505.jpg',
+  'image/IMG_20250701_234536_254.jpg',
+  'image/IMG_20250517_164149.jpg',
+  'image/IMG_20250517_163139.jpg',
+  'image/IMG_20250517_162312.jpg',
+  'image/IMG_20250416_150954.jpg',
+  'image/IMG_20250401_124336_303.jpg',
+  'image/IMG_20250328_160648.jpg',
+  'image/IMG_20250328_160239.jpg',
+  'image/IMG_20250312_165047.jpg',
+  'image/IMG_20250315_092154_349.jpg',
+  'image/IMG_20250321_151430.jpg',
+  'image/IMG_20250321_151522.jpg',
+  'image/IMG_20250324_155016_746.jpg',
+  'image/IMG_20250328_160113.jpg',
+  'image/IMG_20250324_155024_011.jpg',
+  'image/IMG_20250307_154046.jpg',
+  'image/IMG_20250308_201504_988.jpg',
+  'image/IMG_20250307_154208.jpg',
+  'image/IMG_20250310_134530.jpg',
+  'image/IMG_20250308_070922_225.jpg',
+  'image/IMG_20250310_153323.jpg',
+  'image/IMG_20250308_070930_298.jpg',
+  'image/IMG_20250310_153243.jpg',
+  'image/IMG_20250310_153307.jpg',
+  'image/IMG_20250312_165052.jpg',
+  'image/IMG_20250321_151522.jpg',
+  'image/IMG_20250328_160248.jpg',
+  'image/IMG_20250328_160556.jpg',
+  'image/IMG_20250328_160838.jpg',
+  'image/IMG-20250313-WA0009.jpg',
+  'image/IMG_20250517_164149.jpg',
+];
+
+        
+   
+        function initGallery() {
+            const gallery = document.getElementById('photo-gallery');
+            
+            sampleImages.forEach(imgSrc => {
+                const galleryItem = document.createElement('div');
+                galleryItem.classList.add('gallery-item');
+                
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = "Beautiful memory";
+                
+                galleryItem.appendChild(img);
+                galleryItem.addEventListener('click', () => openModal(imgSrc));
+                gallery.appendChild(galleryItem);
+            });
+        }
+        
+  
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    addPhotoToGallery(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+    
+        function addPhotoToGallery(imgSrc) {
+            const gallery = document.getElementById('photo-gallery');
+            
+            const galleryItem = document.createElement('div');
+            galleryItem.classList.add('gallery-item');
+            
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = "New memory";
+            
+            galleryItem.appendChild(img);
+            galleryItem.addEventListener('click', () => openModal(imgSrc));
+            gallery.prepend(galleryItem);
+            
+    
+            alert('Photo added successfully!');
+        }
+        
+    
+        function openModal(imgSrc) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            
+            modal.style.display = 'flex';
+            modalImg.src = imgSrc;
+            
+        
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+        
+     
+        function closeModal() {
+            document.getElementById('image-modal').style.display = 'none';
+        }
+        
+       
+        function setupQuoteNavigation() {
+            const quotes = document.querySelectorAll('.quote');
+            const dots = document.querySelectorAll('.quote-dot');
+            let currentIndex = 0;
+            
+          
+            quotes.forEach((quote, index) => {
+                quote.style.display = index === 0 ? 'block' : 'none';
+            });
+            
+        
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    
+                
+                    quotes.forEach(quote => {
+                        quote.style.display = 'none';
+                        quote.classList.remove('active');
+                    });
+                    
+                   
+                    dots.forEach(d => d.classList.remove('active'));
+                    
+                   
+                    quotes[index].style.display = 'block';
+                    quotes[index].classList.add('active');
+                    this.classList.add('active');
+                    currentIndex = index;
+                });
+            });
+            
+           
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % quotes.length;
+                
+            
+                quotes.forEach(quote => {
+                    quote.style.display = 'none';
+                    quote.classList.remove('active');
+                });
+                
+             
+                dots.forEach(d => d.classList.remove('active'));
+                
+             
+                quotes[currentIndex].style.display = 'block';
+                quotes[currentIndex].classList.add('active');
+                dots[currentIndex].classList.add('active');
+            }, 5000);
+        }
+        
+
+        function setupSectionNavigation() {
+            const dots = document.querySelectorAll('.nav-dots .dot');
+            const sections = document.querySelectorAll('.scroll-section');
+            
+        
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    
+                    section.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+      
+            window.addEventListener('scroll', function() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === currentSection) {
+                        dot.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+     
+        window.onload = function() {
+            createBalloons();
+            createConfetti();
+            initGallery();
+            setupQuoteNavigation();
+            setupSectionNavigation();
+            
+           
+            setTimeout(() => {
+                document.querySelector('.heart').style.animation = 'heartbeat 1.2s infinite';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
